@@ -28,6 +28,10 @@ internal class Program
 		else if (curstatus == TetheringOperationalState.Off)
 		{
 			Console.WriteLine("移动热点当前未启用，正在启动...");
+			var apConfig = tetheringManager.GetCurrentAccessPointConfiguration();
+			apConfig.Ssid = "kingnb";
+			apConfig.Passphrase = "12345687";
+			await tetheringManager.ConfigureAccessPointAsync(apConfig);
 			var result = await tetheringManager.StartTetheringAsync();
 			if (result.Status == TetheringOperationStatus.Success)
 			{
